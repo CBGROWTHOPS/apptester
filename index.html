@@ -518,14 +518,42 @@
       font-size: 13px;
     }
     .footer-row {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
       text-align: center;
+      align-items: center;
     }
-    .footer-links { display: flex; gap: 22px; }
+    @media (min-width: 720px) {
+      .footer-row { grid-template-columns: auto 1fr auto; text-align: left; }
+      .footer-col-center { text-align: center; }
+      .footer-col-right { text-align: right; }
+    }
+    .footer-links { display: flex; gap: 22px; justify-content: center; }
+    @media (min-width: 720px) { .footer-links { justify-content: flex-end; } }
     .footer-links a:hover { color: var(--text); }
+    .footer-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    @media (min-width: 720px) { .footer-badges { justify-content: flex-start; } }
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 7px 12px;
+      text-decoration: none;
+      cursor: default;
+    }
+    .footer-badge svg { flex-shrink: 0; }
+    .footer-badge .bt { display: flex; flex-direction: column; line-height: 1.1; }
+    .footer-badge .bt-sm { font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 0.02em; }
+    .footer-badge .bt-lg { font-size: 12px; font-weight: 600; color: white; letter-spacing: 0.01em; }
+    .footer-meta { font-size: 11px; color: #5a5d80; max-width: 640px; margin: 0 auto; }
 
     /* STICKY MOBILE CTA */
     .sticky-cta {
@@ -621,16 +649,6 @@
             </div>
           </div>
         </div>
-        <div class="store-badges">
-          <div class="badge" aria-label="Available on the App Store">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-            <div class="badge-text"><span class="badge-small">Available on the</span><span class="badge-big">App Store</span></div>
-          </div>
-          <div class="badge" aria-label="Get it on Google Play">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 20.5V3.5c0-.59.34-1.11.84-1.35l13.69 9.85L3.84 21.85c-.5-.25-.84-.76-.84-1.35z" fill="#00D4FF"/><path d="M16.81 15.12L6.05 21.34l8.49-8.49 2.27 2.27z" fill="#FF3D44"/><path d="M20.16 10.81c.5.28.83.8.83 1.37s-.33 1.09-.83 1.37l-3.34 1.94-2.27-2.27 2.27-2.27 3.34 1.86z" fill="#FFB700"/><path d="M6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z" fill="#00F076"/></svg>
-            <div class="badge-text"><span class="badge-small">GET IT ON</span><span class="badge-big">Google Play</span></div>
-          </div>
-        </div>
       </div>
 
       <div class="trust">
@@ -708,14 +726,26 @@
   </section>
 
   <footer id="contact">
-    <div class="container footer-row">
-      <div>© <span id="yr"></span> App Tester · Nielsen Pulse onboarding</div>
-      <div class="footer-links">
-        <a href="https://trk.ssaff.link/nielsen-privacy" target="_blank" rel="noopener">Privacy</a>
-        <a href="https://trk.ssaff.link/nielsen-terms" target="_blank" rel="noopener">Terms</a>
-        <a href="mailto:hello@apptester.online">Contact</a>
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-badges">
+          <div class="footer-badge" aria-label="Available on the App Store">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            <div class="bt"><span class="bt-sm">Available on the</span><span class="bt-lg">App Store</span></div>
+          </div>
+          <div class="footer-badge" aria-label="Get it on Google Play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 20.5V3.5c0-.59.34-1.11.84-1.35l13.69 9.85L3.84 21.85c-.5-.25-.84-.76-.84-1.35z" fill="#00D4FF"/><path d="M16.81 15.12L6.05 21.34l8.49-8.49 2.27 2.27z" fill="#FF3D44"/><path d="M20.16 10.81c.5.28.83.8.83 1.37s-.33 1.09-.83 1.37l-3.34 1.94-2.27-2.27 2.27-2.27 3.34 1.86z" fill="#FFB700"/><path d="M6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z" fill="#00F076"/></svg>
+            <div class="bt"><span class="bt-sm">GET IT ON</span><span class="bt-lg">Google Play</span></div>
+          </div>
+        </div>
+        <div class="footer-col-center">© <span id="yr"></span> App Tester · Nielsen Pulse onboarding</div>
+        <div class="footer-links footer-col-right">
+          <a href="https://trk.ssaff.link/nielsen-privacy" target="_blank" rel="noopener">Privacy</a>
+          <a href="https://trk.ssaff.link/nielsen-terms" target="_blank" rel="noopener">Terms</a>
+          <a href="mailto:hello@apptester.online">Contact</a>
+        </div>
       </div>
-      <div style="font-size:11px; color:#5a5d80; max-width: 640px;">
+      <div class="footer-meta" style="margin-top: 18px; text-align: center;">
         Rewards vary based on participation and platform terms. Available to US residents 18+. Nielsen Pulse is operated by Nielsen.
       </div>
     </div>
