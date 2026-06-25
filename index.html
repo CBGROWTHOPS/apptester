@@ -3,179 +3,744 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>App Tester — Begin Onboarding</title>
-  <meta name="description" content="Start your App Tester onboarding. Earn rewards for your screen time." />
+  <title>Nielsen Pulse — App Tester Onboarding</title>
+  <meta name="description" content="Continue your Nielsen Pulse onboarding. Earn passive rewards for your screen time. US residents 18+." />
   <meta name="theme-color" content="#0a0820" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%237c5cff' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%234dd4d6'/%3E%3C/svg%3E" />
+  <link rel="icon" href="/assets/nielsen-pulse-logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/nielsen-pulse-logo.svg" />
   <style>
     :root {
       --bg: #0a0820;
+      --bg-2: #14102e;
       --purple: #7c5cff;
       --purple-2: #9b82ff;
-      --cyan: #4dd4d6;
+      --cyan: #32BBB9;
+      --cyan-2: #4dd4d6;
       --text: #ffffff;
       --muted: #9ea0c2;
+      --light: #f4f5ff;
+      --light-2: #e6e7ff;
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { margin: 0; padding: 0; height: 100%; }
+    html, body { margin: 0; padding: 0; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* HEADER */
+    header {
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 50;
+    }
+    .nav {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
-      position: relative;
-      overflow: hidden;
+      justify-content: space-between;
+      gap: 16px;
     }
-    body::before {
-      content: "";
-      position: absolute;
-      top: -300px;
-      right: -300px;
-      width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(124,92,255,.22) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    body::after {
-      content: "";
-      position: absolute;
-      bottom: -300px;
-      left: -300px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(77,212,214,.15) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .splash {
-      position: relative;
-      text-align: center;
-      max-width: 520px;
-      width: 100%;
-    }
-    .logo {
-      width: 96px; height: 96px;
-      margin: 0 auto 32px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 50%, var(--cyan) 0 18%, transparent 18.5%),
-        radial-gradient(circle at 50% 50%, transparent 38%, var(--purple) 38.5% 44%, transparent 44.5%);
-      transform: rotate(15deg);
-      box-shadow: 0 20px 60px -10px rgba(124,92,255,.4);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 20px 60px -10px rgba(124,92,255,.4); }
-      50% { box-shadow: 0 25px 70px -10px rgba(124,92,255,.65); }
-    }
-    .brand-name {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(90deg, var(--purple-2), var(--cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin: 0 0 8px;
-    }
-    .eyebrow {
-      display: inline-block;
-      font-size: 11px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
       font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--cyan);
-      background: rgba(77,212,214,.1);
-      border: 1px solid rgba(77,212,214,.25);
-      border-radius: 999px;
-      padding: 6px 14px;
-      margin: 0 0 22px;
-    }
-    .tagline {
-      font-size: clamp(20px, 4vw, 26px);
-      font-weight: 600;
-      line-height: 1.3;
-      color: white;
-      margin: 0 0 12px;
       letter-spacing: -0.01em;
     }
-    .tagline strong {
-      background: linear-gradient(90deg, var(--purple-2), var(--cyan));
+    .brand img { width: 34px; height: 34px; }
+    .brand-name {
+      background: linear-gradient(90deg, var(--purple-2), var(--cyan-2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 800;
     }
-    .sub {
-      color: var(--muted);
+    .nav-links {
+      display: none;
+      gap: 28px;
       font-size: 15px;
-      margin: 0 0 44px;
+      color: var(--muted);
     }
-    .btn {
+    .nav-links a:hover { color: var(--text); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-pill {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.04);
+      font-size: 14px;
+      color: var(--text);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.35); }
+
+    @media (min-width: 800px) {
+      .nav-links { display: flex; }
+      .lang-pill { display: inline-flex; }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 60px 0 120px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(124,92,255,.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 60px; }
+    }
+    .hero-h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin: 0 0 14px;
+    }
+    .hero-h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: -0.02em;
+      margin: 0 0 36px;
+    }
+
+    /* Referral code box */
+    .code-box {
+      max-width: 440px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .code-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .code-input {
+      width: 100%;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.18);
+      border-radius: 12px;
+      padding: 16px 18px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      outline: none;
+      transition: border-color .15s;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      text-transform: uppercase;
+    }
+    .code-input::placeholder { color: var(--muted); font-weight: 500; letter-spacing: 0.02em; text-transform: none; }
+    .code-input:focus { border-color: var(--cyan); background: rgba(50,187,185,.06); }
+    .code-help {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .code-err {
+      display: none;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+    .code-err.show { display: block; }
+
+    .cta-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       background: var(--purple);
       color: white;
-      padding: 20px 48px;
+      padding: 18px 38px;
       border-radius: 14px;
       font-size: 17px;
       font-weight: 700;
       border: none;
       cursor: pointer;
       box-shadow: 0 10px 40px -10px rgba(124,92,255,.55);
+      transition: transform .15s, box-shadow .15s, opacity .15s;
       text-decoration: none;
-      transition: transform .15s, box-shadow .15s;
       letter-spacing: -0.01em;
       font-family: inherit;
+      max-width: 440px;
+      width: 100%;
     }
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 50px -10px rgba(124,92,255,.7); }
-    .btn:active { transform: translateY(0); }
-    .btn:disabled { opacity: .7; cursor: progress; }
-    .footnote {
-      margin-top: 22px;
-      font-size: 12px;
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 50px -10px rgba(124,92,255,.7); }
+    .cta-btn:active { transform: translateY(0); }
+    .cta-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .terms-link {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .terms-link:hover { color: var(--text); }
+
+    .trust {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .trust-avatars { display: flex; }
+    .trust-avatars div {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      margin-left: -8px;
+      background-size: cover; background-position: center;
+    }
+    .trust-avatars div:first-child { margin-left: 0; }
+    .trust-avatars .a1 { background: linear-gradient(135deg, #f9a8d4, #ec4899); }
+    .trust-avatars .a2 { background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+    .trust-avatars .a3 { background: linear-gradient(135deg, #a5b4fc, #6366f1); }
+    .trust-avatars .a4 { background: linear-gradient(135deg, #6ee7b7, #10b981); }
+    .trust-txt { font-size: 14px; color: var(--muted); }
+
+    /* HERO RIGHT: device mockup */
+    .device-stack {
+      position: relative;
+      min-height: 320px;
+      display: flex;
+      justify-content: center;
+    }
+    .laptop {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #1a1640, #0a0820);
+      border: 1px solid rgba(124,92,255,.25);
+      border-radius: 16px;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,.6);
+      padding: 30px 18px 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .laptop::after {
+      content: "Shows & Movies";
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
       color: var(--muted);
     }
-    .footnote a { color: var(--muted); text-decoration: underline; }
-    .footnote a:hover { color: white; }
+    .tile {
+      border-radius: 8px;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      opacity: .8;
+    }
+    .tile:nth-child(2) { background: linear-gradient(135deg, #f97316, #ef4444); }
+    .tile:nth-child(3) { background: linear-gradient(135deg, #ec4899, #8b5cf6); }
+    .tile:nth-child(4) { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .tile:nth-child(5) { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .tile:nth-child(6) { background: linear-gradient(135deg, #10b981, #06b6d4); }
+
+    .phone {
+      position: absolute;
+      bottom: -30px;
+      left: 8%;
+      width: 130px;
+      aspect-ratio: 9/19;
+      background: #0a0820;
+      border: 3px solid #2a2548;
+      border-radius: 22px;
+      padding: 12px 10px;
+      box-shadow: 0 25px 50px -10px rgba(0,0,0,.7);
+    }
+    .phone-label { font-size: 10px; color: var(--muted); text-align: center; }
+    .phone-card {
+      background: white;
+      color: #0a0820;
+      border-radius: 10px;
+      padding: 10px 8px;
+      margin-top: 8px;
+      font-size: 9px;
+    }
+    .phone-card-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .phone-card-row:last-child { border: none; }
+    .phone-pts { font-weight: 700; color: var(--purple); font-size: 11px; }
+    .phone-btn {
+      background: var(--purple); color: white;
+      padding: 6px; border-radius: 8px; text-align: center;
+      font-size: 9px; font-weight: 600; margin-top: 6px;
+    }
+    .powered {
+      position: absolute;
+      bottom: 12px; right: 14px;
+      font-size: 9px;
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .powered img { width: 12px; height: 12px; }
+
+    /* HOW TO EARN section */
+    .how {
+      background: var(--light);
+      color: #0a0820;
+      padding: 80px 0 100px;
+      border-radius: 32px 32px 0 0;
+      margin-top: -40px;
+      position: relative;
+      z-index: 2;
+    }
+    .how-card {
+      background: white;
+      border-radius: 24px;
+      padding: 50px 30px;
+      max-width: 920px;
+      margin: 0 auto;
+      box-shadow: 0 20px 50px -20px rgba(124,92,255,.18);
+    }
+    .how-h {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .how-sub {
+      text-align: center;
+      color: #5a5d80;
+      font-size: 15px;
+      margin: 0 0 40px;
+    }
+    .how-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 720px) {
+      .how-steps { grid-template-columns: repeat(3, 1fr); }
+    }
+    .step {
+      text-align: center;
+      padding: 18px;
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .step h4 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+    .step p { margin: 0; font-size: 14px; color: #5a5d80; line-height: 1.55; }
+
+    /* WHY section */
+    .why {
+      background: var(--light);
+      color: #0a0820;
+      padding: 0 0 100px;
+    }
+    .why-card {
+      max-width: 920px;
+      margin: 40px auto 0;
+      background: linear-gradient(135deg, var(--bg-2), #1a1640);
+      color: white;
+      padding: 50px 36px;
+      border-radius: 24px;
+      text-align: center;
+    }
+    .why-h { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; margin: 0 0 14px; letter-spacing: -0.02em; }
+    .why-p { font-size: 16px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
+    .why-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: white;
+      color: var(--purple);
+      padding: 14px 30px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .why-cta:hover { background: var(--cyan); color: #0a0820; }
+
+    /* FAQ */
+    .faq {
+      background: var(--light);
+      padding: 0 0 80px;
+    }
+    .faq-wrap { max-width: 720px; margin: 0 auto; }
+    .faq-h {
+      text-align: center;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      margin: 0 0 30px;
+      color: #0a0820;
+      letter-spacing: -0.02em;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      padding: 18px 22px;
+      color: #0a0820;
+    }
+    .faq-q {
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-q::after { content: "+"; font-size: 20px; color: var(--purple); }
+    details[open] .faq-q::after { content: "−"; }
+    .faq-a {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #5a5d80;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      padding: 40px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* STICKY MOBILE CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--light-2);
+      color: #0a0820;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,.1);
+      z-index: 40;
+      transform: translateY(120%);
+      transition: transform .4s ease;
+    }
+    .sticky-cta.show { transform: translateY(0); }
+    .sticky-cta-txt { font-size: 14px; font-weight: 600; }
+    .sticky-cta-btn {
+      background: white;
+      color: var(--purple);
+      border: 1px solid var(--purple);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .sticky-cta-btn:hover { background: var(--purple); color: white; }
   </style>
 </head>
 <body>
-  <div class="splash">
-    <div class="logo" aria-hidden="true"></div>
-    <h1 class="brand-name">App Tester</h1>
-    <p class="eyebrow">ONBOARDING</p>
-    <p class="tagline">You're almost in. Continue your <strong>onboarding</strong> to start earning rewards for your screen time.</p>
-    <p class="sub">Takes about 5 minutes · US residents 18+</p>
-    <button class="btn" id="go" type="button">Continue Onboarding →</button>
-    <p class="footnote">
-      *<a href="/terms">Terms apply</a> · <a href="/privacy">Privacy</a>
-    </p>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/">
+        <img src="/assets/nielsen-pulse-logo.svg" alt="Nielsen Pulse" />
+        <span class="brand-name">Nielsen Pulse</span>
+      </a>
+      <div class="nav-links">
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-right">
+        <span class="lang-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14M5 8a7 7 0 1014 0M12 3v18"/></svg>
+          English
+        </span>
+        <a href="#hero-cta" class="btn-outline">Continue Onboarding</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="hero-cta">
+    <div class="container hero-grid">
+      <div>
+        <h1 class="hero-h1">Earn rewards for your screen time.</h1>
+        <h2 class="hero-h2">Continue Your Onboarding</h2>
+
+        <div class="code-box">
+          <label class="code-label" for="refCode">Applicant Referral Code</label>
+          <input
+            id="refCode"
+            class="code-input"
+            type="text"
+            placeholder="Enter the code you were given"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+            maxlength="32"
+          />
+          <div class="code-help" id="codeHelp">Don't have a code? Contact your onboarding agent.</div>
+          <div class="code-err" id="codeErr">Please enter a valid referral code.</div>
+        </div>
+
+        <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
+        <a href="/terms" class="terms-link">*Terms Apply</a>
+
+        <div class="trust">
+          <div class="trust-avatars">
+            <div class="a1"></div><div class="a2"></div><div class="a3"></div><div class="a4"></div>
+          </div>
+          <span class="trust-txt">Trusted by panelists across the US.</span>
+        </div>
+      </div>
+      <div class="device-stack">
+        <div class="laptop">
+          <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+          <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+        <div class="phone">
+          <div class="phone-label">Dashboard</div>
+          <div class="phone-card">
+            <div class="phone-card-row">
+              <span>Your Points</span>
+              <span class="phone-pts">3,000</span>
+            </div>
+            <div class="phone-card-row">
+              <span>Reward points</span>
+              <span style="color:var(--cyan);">+$10</span>
+            </div>
+            <div class="phone-card-row">
+              <span>Redeemed</span>
+              <span>$20</span>
+            </div>
+            <div class="phone-btn">Redeem</div>
+          </div>
+        </div>
+        <div class="powered">
+          <img src="/assets/nielsen-pulse-logo.svg" alt="" />
+          Powered by Nielsen
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <div class="how-card">
+        <h2 class="how-h">How to earn?</h2>
+        <p class="how-sub">Three steps. Five minutes. Earn passively from then on.</p>
+        <div class="how-steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h4>Register</h4>
+            <p>Complete onboarding on the secure Nielsen site in under 2 minutes.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h4>Install</h4>
+            <p>Download the Nielsen Pulse app on your phone. iPhone and Android supported.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h4>Earn</h4>
+            <p>Finish the in-app setup. Earn passively — no daily tasks required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="container">
+      <div class="why-card">
+        <h3 class="why-h">Why we pay you</h3>
+        <p class="why-p">Brands and researchers need real insight into how people actually use their phones. By joining the panel, you help shape the future of online products — and get rewarded for it.</p>
+        <button class="why-cta" type="button" onclick="document.getElementById('refCode').focus(); window.scrollTo({top:0,behavior:'smooth'});">Continue Onboarding ↑</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container faq-wrap">
+      <h3 class="faq-h">Frequently Asked Questions</h3>
+      <details class="faq-item">
+        <summary class="faq-q">What is the referral code?</summary>
+        <div class="faq-a">Your referral code is provided by your onboarding agent after you've been pre-qualified. It links your application to your agent and unlocks the next step of onboarding.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What kind of data does Nielsen Pulse collect?</summary>
+        <div class="faq-a">The Nielsen Pulse app passively measures which apps and sites you use. It does not capture passwords, messages, or personal content. Full disclosure is shown during setup.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How much can I earn?</summary>
+        <div class="faq-a">Rewards vary based on participation, device, and the platform's terms. Your dashboard shows current earnings any time.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Who qualifies?</summary>
+        <div class="faq-a">US residents 18+ with a supported iPhone, iPad, or Android device. Your onboarding agent confirms eligibility before issuing a referral code.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Can I leave the panel anytime?</summary>
+        <div class="faq-a">Yes. Remove the app from your phone at any time. No cancellation fees, no commitments.</div>
+      </details>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container footer-row">
+      <div>© <span id="yr"></span> App Tester · Nielsen Pulse onboarding</div>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hello@apptester.online">Contact</a>
+      </div>
+      <div style="font-size:11px; color:#5a5d80; max-width: 640px;">
+        Rewards vary based on participation and platform terms. Available to US residents 18+. Nielsen Pulse is operated by Nielsen.
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-txt">Have your code?</div>
+    <button class="sticky-cta-btn" type="button" onclick="document.getElementById('refCode').focus(); window.scrollTo({top:0,behavior:'smooth'});">Continue ↑</button>
   </div>
 
   <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
     var ROTATOR = "https://trk.ssaff.link/mb-32298";
     var BRAND_SLUG = "ato";
+
+    var refInput = document.getElementById('refCode');
+    var goBtn = document.getElementById('go');
+    var errEl = document.getElementById('codeErr');
+
+    // Min code length to enable button. Tune as needed.
+    var MIN_LEN = 4;
+
+    refInput.addEventListener('input', function(){
+      var v = refInput.value.trim();
+      goBtn.disabled = v.length < MIN_LEN;
+      if (errEl.classList.contains('show')) errEl.classList.remove('show');
+    });
 
     function readCookie(name){
       var m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]*)'));
       return m ? decodeURIComponent(m[2]) : null;
     }
 
-    document.getElementById('go').onclick = function(){
-      var btn = this;
-      btn.disabled = true; btn.textContent = 'Loading…';
+    goBtn.onclick = function(){
+      var code = refInput.value.trim().toUpperCase();
+      if (code.length < MIN_LEN) {
+        errEl.classList.add('show');
+        refInput.focus();
+        return;
+      }
+      goBtn.disabled = true;
+      goBtn.textContent = 'Loading…';
       var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || null;
       var href = cmcVid
         ? ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG
         : ROTATOR + '/' + BRAND_SLUG;
-      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue'}); } catch(e){}
+      // Pass referral code as query param for sub-ID tracking through the chain
+      href += (href.indexOf('?') > -1 ? '&' : '?') + 'ref=' + encodeURIComponent(code);
+      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: code}); } catch(e){}
       window.location.href = href;
     };
+
+    // Auto-fill ref code from URL ?ref=XYZ so VAs can give pre-filled links
+    (function(){
+      var qp = new URLSearchParams(window.location.search);
+      var prefill = qp.get('ref') || qp.get('code');
+      if (prefill) {
+        refInput.value = prefill.toUpperCase();
+        refInput.dispatchEvent(new Event('input'));
+      }
+    })();
+
+    // Sticky mobile CTA
+    var sticky = document.getElementById('stickyCta');
+    window.addEventListener('scroll', function(){
+      if (window.scrollY > 600) sticky.classList.add('show');
+      else sticky.classList.remove('show');
+    }, { passive: true });
   </script>
 </body>
 </html>
