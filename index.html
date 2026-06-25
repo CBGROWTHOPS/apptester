@@ -594,9 +594,6 @@
       <h2 class="hero-h2">Continue Your Onboarding</h2>
 
       <div class="code-box">
-        <div class="status-pill" id="statusPill">
-          <span class="dot"></span><span id="statusTxt">Pending Code Verification</span>
-        </div>
         <label class="code-label" id="codeLabel" for="refCode">Enter Your Applicant Referral Code</label>
         <input
           id="refCode"
@@ -732,8 +729,6 @@
     var goBtn = document.getElementById('go');
     var errEl = document.getElementById('codeErr');
     var labelEl = document.getElementById('codeLabel');
-    var pillEl = document.getElementById('statusPill');
-    var pillTxt = document.getElementById('statusTxt');
     var refNumVal = document.getElementById('refNumVal');
 
     var MIN_LEN = 4;
@@ -772,8 +767,6 @@
       // 1) Verifying state
       goBtn.disabled = true;
       goBtn.innerHTML = '<span class="spin"></span> Verifying your code…';
-      pillEl.classList.add('verifying');
-      pillTxt.textContent = 'Verifying with Panel Database';
 
       var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || null;
       var href = cmcVid
@@ -781,11 +774,8 @@
         : ROTATOR + '/' + BRAND_SLUG;
       href += (href.indexOf('?') > -1 ? '&' : '?') + 'ref=' + encodeURIComponent(code);
 
-      // 2) Flip to verified after 1.8s
+      // 2) Flip label to verified after 1.8s
       setTimeout(function(){
-        pillEl.classList.remove('verifying');
-        pillEl.classList.add('verified');
-        pillTxt.textContent = 'Verified ✓';
         labelEl.classList.add('verified');
         goBtn.innerHTML = 'Continuing…';
         try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: code}); } catch(e){}
