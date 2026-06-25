@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Nielsen Pulse — App Tester Onboarding</title>
-  <meta name="description" content="Continue your Nielsen Pulse onboarding. Earn passive rewards for your screen time. US residents 18+." />
+  <title>App Tester — Continue Onboarding</title>
+  <meta name="description" content="Continue your onboarding. Earn passive rewards for your screen time. US residents 18+." />
   <meta name="theme-color" content="#0a0820" />
-  <link rel="icon" href="/assets/nielsen-pulse-logo.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/nielsen-pulse-logo.svg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%237c5cff'/%3E%3C/svg%3E" />
   <style>
     :root {
       --bg: #0a0820;
@@ -122,13 +121,12 @@
     }
     .hero-grid {
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-    }
-    @media (min-width: 900px) {
-      .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 60px; }
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
     }
     .hero-h1 {
       font-size: clamp(36px, 6vw, 56px);
@@ -148,12 +146,14 @@
 
     /* Referral code box */
     .code-box {
+      width: 100%;
       max-width: 440px;
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 16px;
       padding: 22px;
-      margin-bottom: 16px;
+      margin: 0 auto 16px;
+      text-align: left;
     }
     .code-label {
       display: block;
@@ -233,110 +233,20 @@
       margin-top: 40px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 14px;
     }
     .trust-avatars { display: flex; }
-    .trust-avatars div {
-      width: 36px; height: 36px;
+    .trust-avatars img {
+      width: 38px; height: 38px;
       border-radius: 50%;
-      border: 2px solid var(--bg);
-      margin-left: -8px;
-      background-size: cover; background-position: center;
+      border: 2.5px solid var(--bg);
+      margin-left: -10px;
+      object-fit: cover;
+      background: var(--bg-2);
     }
-    .trust-avatars div:first-child { margin-left: 0; }
-    .trust-avatars .a1 { background: linear-gradient(135deg, #f9a8d4, #ec4899); }
-    .trust-avatars .a2 { background: linear-gradient(135deg, #fcd34d, #f59e0b); }
-    .trust-avatars .a3 { background: linear-gradient(135deg, #a5b4fc, #6366f1); }
-    .trust-avatars .a4 { background: linear-gradient(135deg, #6ee7b7, #10b981); }
+    .trust-avatars img:first-child { margin-left: 0; }
     .trust-txt { font-size: 14px; color: var(--muted); }
-
-    /* HERO RIGHT: device mockup */
-    .device-stack {
-      position: relative;
-      min-height: 320px;
-      display: flex;
-      justify-content: center;
-    }
-    .laptop {
-      width: 100%;
-      max-width: 480px;
-      aspect-ratio: 16/10;
-      background: linear-gradient(135deg, #1a1640, #0a0820);
-      border: 1px solid rgba(124,92,255,.25);
-      border-radius: 16px;
-      box-shadow: 0 30px 80px -20px rgba(0,0,0,.6);
-      padding: 30px 18px 18px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-    }
-    .laptop::after {
-      content: "Shows & Movies";
-      position: absolute;
-      top: 12px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 11px;
-      color: var(--muted);
-    }
-    .tile {
-      border-radius: 8px;
-      aspect-ratio: 4/3;
-      background: linear-gradient(135deg, var(--purple), var(--cyan));
-      opacity: .8;
-    }
-    .tile:nth-child(2) { background: linear-gradient(135deg, #f97316, #ef4444); }
-    .tile:nth-child(3) { background: linear-gradient(135deg, #ec4899, #8b5cf6); }
-    .tile:nth-child(4) { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
-    .tile:nth-child(5) { background: linear-gradient(135deg, #f59e0b, #ef4444); }
-    .tile:nth-child(6) { background: linear-gradient(135deg, #10b981, #06b6d4); }
-
-    .phone {
-      position: absolute;
-      bottom: -30px;
-      left: 8%;
-      width: 130px;
-      aspect-ratio: 9/19;
-      background: #0a0820;
-      border: 3px solid #2a2548;
-      border-radius: 22px;
-      padding: 12px 10px;
-      box-shadow: 0 25px 50px -10px rgba(0,0,0,.7);
-    }
-    .phone-label { font-size: 10px; color: var(--muted); text-align: center; }
-    .phone-card {
-      background: white;
-      color: #0a0820;
-      border-radius: 10px;
-      padding: 10px 8px;
-      margin-top: 8px;
-      font-size: 9px;
-    }
-    .phone-card-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 4px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .phone-card-row:last-child { border: none; }
-    .phone-pts { font-weight: 700; color: var(--purple); font-size: 11px; }
-    .phone-btn {
-      background: var(--purple); color: white;
-      padding: 6px; border-radius: 8px; text-align: center;
-      font-size: 9px; font-weight: 600; margin-top: 6px;
-    }
-    .powered {
-      position: absolute;
-      bottom: 12px; right: 14px;
-      font-size: 9px;
-      color: var(--muted);
-      background: rgba(255,255,255,.05);
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(255,255,255,.1);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .powered img { width: 12px; height: 12px; }
 
     /* HOW TO EARN section */
     .how {
@@ -521,8 +431,7 @@
   <header>
     <div class="container nav">
       <a class="brand" href="/">
-        <img src="/assets/nielsen-pulse-logo.svg" alt="Nielsen Pulse" />
-        <span class="brand-name">Nielsen Pulse</span>
+        <span class="brand-name">App Tester</span>
       </a>
       <div class="nav-links">
         <a href="#faq">FAQ</a>
@@ -540,63 +449,36 @@
 
   <section class="hero" id="hero-cta">
     <div class="container hero-grid">
-      <div>
-        <h1 class="hero-h1">Earn rewards for your screen time.</h1>
-        <h2 class="hero-h2">Continue Your Onboarding</h2>
+      <h1 class="hero-h1">Earn rewards for your screen time.</h1>
+      <h2 class="hero-h2">Continue Your Onboarding</h2>
 
-        <div class="code-box">
-          <label class="code-label" for="refCode">Applicant Referral Code</label>
-          <input
-            id="refCode"
-            class="code-input"
-            type="text"
-            placeholder="Enter the code you were given"
-            autocomplete="off"
-            autocapitalize="characters"
-            spellcheck="false"
-            maxlength="32"
-          />
-          <div class="code-help" id="codeHelp">Don't have a code? Contact your onboarding agent.</div>
-          <div class="code-err" id="codeErr">Please enter a valid referral code.</div>
-        </div>
-
-        <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
-        <a href="/terms" class="terms-link">*Terms Apply</a>
-
-        <div class="trust">
-          <div class="trust-avatars">
-            <div class="a1"></div><div class="a2"></div><div class="a3"></div><div class="a4"></div>
-          </div>
-          <span class="trust-txt">Trusted by panelists across the US.</span>
-        </div>
+      <div class="code-box">
+        <label class="code-label" for="refCode">Applicant Referral Code</label>
+        <input
+          id="refCode"
+          class="code-input"
+          type="text"
+          placeholder="Enter the code you were given"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          maxlength="32"
+        />
+        <div class="code-help" id="codeHelp">Don't have a code? Contact your onboarding agent.</div>
+        <div class="code-err" id="codeErr">Please enter a valid referral code.</div>
       </div>
-      <div class="device-stack">
-        <div class="laptop">
-          <div class="tile"></div><div class="tile"></div><div class="tile"></div>
-          <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+
+      <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
+      <a href="/terms" class="terms-link">*Terms Apply</a>
+
+      <div class="trust">
+        <div class="trust-avatars">
+          <img src="https://images.pexels.com/photos/33970123/pexels-photo-33970123.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+          <img src="https://images.pexels.com/photos/14950779/pexels-photo-14950779.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+          <img src="https://images.pexels.com/photos/6497112/pexels-photo-6497112.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+          <img src="https://images.pexels.com/photos/16869444/pexels-photo-16869444.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
         </div>
-        <div class="phone">
-          <div class="phone-label">Dashboard</div>
-          <div class="phone-card">
-            <div class="phone-card-row">
-              <span>Your Points</span>
-              <span class="phone-pts">3,000</span>
-            </div>
-            <div class="phone-card-row">
-              <span>Reward points</span>
-              <span style="color:var(--cyan);">+$10</span>
-            </div>
-            <div class="phone-card-row">
-              <span>Redeemed</span>
-              <span>$20</span>
-            </div>
-            <div class="phone-btn">Redeem</div>
-          </div>
-        </div>
-        <div class="powered">
-          <img src="/assets/nielsen-pulse-logo.svg" alt="" />
-          Powered by Nielsen
-        </div>
+        <span class="trust-txt">Trusted by panelists across the US.</span>
       </div>
     </div>
   </section>
