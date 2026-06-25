@@ -1,0 +1,19 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glow)" transform="translate(16 16)">
+    <!-- Cyan ellipse -->
+    <ellipse cx="0" cy="0" rx="13" ry="5" fill="none" stroke="#32BBB9" stroke-width="2.5" transform="rotate(45)"/>
+    <!-- Magenta/purple ellipse crossing -->
+    <ellipse cx="0" cy="0" rx="13" ry="5" fill="none" stroke="#9b3df0" stroke-width="2.5" transform="rotate(-45)"/>
+    <!-- Center core -->
+    <circle cx="0" cy="0" r="2" fill="#5dffe0"/>
+  </g>
+</svg>
