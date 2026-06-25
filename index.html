@@ -768,11 +768,9 @@
       goBtn.disabled = true;
       goBtn.innerHTML = '<span class="spin"></span> Verifying your code…';
 
-      var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || null;
-      var href = cmcVid
-        ? ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG
-        : ROTATOR + '/' + BRAND_SLUG;
-      href += (href.indexOf('?') > -1 ? '&' : '?') + 'ref=' + encodeURIComponent(code);
+      var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || 'direct';
+      // Path-suffix: [s1]=cmc_vid · [s2]=brand · [s3]=referral code (per-VA attribution)
+      var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG + '/' + encodeURIComponent(code);
 
       // 2) Flip label to verified after 1.8s
       setTimeout(function(){
