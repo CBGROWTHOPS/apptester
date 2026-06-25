@@ -139,133 +139,17 @@
     .hero-mockup {
       display: none;
       position: absolute;
-      bottom: -40px;
-      right: -40px;
-      width: 380px;
+      bottom: -20px;
+      right: -20px;
+      width: 420px;
       pointer-events: none;
       z-index: 0;
-      opacity: .9;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,.5));
     }
+    .hero-mockup img { width: 100%; height: auto; display: block; }
     @media (min-width: 1024px) {
       .hero-mockup { display: block; }
-      .hero-grid { padding-right: 40px; }
     }
-    .mockup-tv {
-      width: 100%;
-      aspect-ratio: 16/10;
-      background: linear-gradient(135deg, #1a1640, #0a0820);
-      border: 1px solid rgba(124,92,255,.25);
-      border-radius: 14px;
-      box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
-      padding: 24px 14px 14px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-    .mockup-tv::before {
-      content: "Shows & Movies";
-      position: absolute;
-      top: 8px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      color: rgba(255,255,255,.5);
-    }
-    .mockup-tile {
-      border-radius: 6px;
-      background: linear-gradient(135deg, var(--purple), var(--cyan));
-      opacity: .85;
-      position: relative;
-      overflow: hidden;
-    }
-    .mockup-tile::after {
-      content: attr(data-label);
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-shadow: 0 1px 3px rgba(0,0,0,.6);
-      text-align: center;
-      padding: 0 4px;
-    }
-    .mockup-tile:nth-child(1) { background: linear-gradient(135deg, #1a4d7a, #0a2540); }
-    .mockup-tile:nth-child(2) { background: linear-gradient(135deg, #b8860b, #6b4900); }
-    .mockup-tile:nth-child(3) { background: linear-gradient(135deg, #6b1d3a, #2d0814); }
-    .mockup-tile:nth-child(4) { background: linear-gradient(135deg, #4d2380, #1a0840); }
-    .mockup-tile:nth-child(5) { background: linear-gradient(135deg, #ff6b35, #b13e1a); }
-    .mockup-tile:nth-child(6) { background: linear-gradient(135deg, #2a5d40, #0e2818); }
-
-    .mockup-phone {
-      position: absolute;
-      bottom: -10px;
-      left: -30px;
-      width: 130px;
-      background: #0a0820;
-      border: 2.5px solid #2a2548;
-      border-radius: 20px;
-      padding: 12px 10px 10px;
-      box-shadow: 0 30px 50px -15px rgba(0,0,0,.85);
-    }
-    .mp-title { font-size: 10px; font-weight: 700; color: white; padding: 0 2px; }
-    .mp-card {
-      background: white;
-      color: #0a0820;
-      border-radius: 8px;
-      padding: 8px 8px;
-      margin-top: 8px;
-      font-size: 8px;
-    }
-    .mp-pts-block {
-      background: #f0f4ff;
-      border-radius: 6px;
-      padding: 5px 6px;
-      margin-bottom: 6px;
-    }
-    .mp-pts-label { font-size: 7px; color: #5a5d80; }
-    .mp-pts { font-weight: 800; color: var(--purple); font-size: 14px; line-height: 1; margin-top: 2px; }
-    .mp-pts .small { font-size: 9px; font-weight: 700; color: #0a0820; margin-left: 4px; }
-    .mp-line {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 4px 2px;
-      border-top: 1px solid #eef;
-      font-size: 7px;
-      color: #5a5d80;
-    }
-    .mp-line strong { color: var(--purple); font-size: 8px; }
-    .mp-btn {
-      background: var(--purple);
-      color: white;
-      text-align: center;
-      padding: 6px;
-      border-radius: 6px;
-      font-size: 9px;
-      font-weight: 700;
-      margin-top: 6px;
-    }
-    .mp-powered {
-      position: absolute;
-      bottom: -28px;
-      right: 0;
-      background: var(--bg-2);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 999px;
-      padding: 5px 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 9px;
-      color: white;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .mp-powered svg { width: 12px; height: 12px; }
     .hero-h1 {
       font-size: clamp(36px, 6vw, 56px);
       line-height: 1.05;
@@ -422,15 +306,15 @@
     }
     .terms-link:hover { color: var(--text); }
 
-    /* RATING ROW (under CTA) */
+    /* RATING ROW (above hero headline) */
     .rating-row {
-      margin-top: 22px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-size: 14px;
       color: white;
       font-weight: 600;
+      margin: 0 auto 22px;
     }
     .rating-row .stars { color: #fbbf24; letter-spacing: -1px; font-size: 15px; }
     .rating-row .count { color: var(--muted); font-weight: 500; }
@@ -687,6 +571,11 @@
 
   <section class="hero" id="hero-cta">
     <div class="container hero-grid">
+      <div class="rating-row" aria-label="App rating">
+        <span class="stars">★★★★★</span>
+        <strong>4.6</strong>
+        <span class="count">· 12,400 reviews</span>
+      </div>
       <h1 class="hero-h1">Earn rewards for your screen time.</h1>
       <h2 class="hero-h2">Continue Your Onboarding</h2>
 
@@ -713,12 +602,6 @@
       <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
       <a href="https://trk.ssaff.link/nielsen-terms" class="terms-link" target="_blank" rel="noopener">*Terms Apply</a>
 
-      <div class="rating-row" aria-label="App rating">
-        <span class="stars">★★★★★</span>
-        <strong>4.6</strong>
-        <span class="count">· 12,400 reviews</span>
-      </div>
-
       <div class="trust">
         <div class="trust-avatars">
           <img src="https://images.pexels.com/photos/33970123/pexels-photo-33970123.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
@@ -732,34 +615,7 @@
 
     <!-- Hero mockup (desktop only, absolute bottom-right) -->
     <div class="hero-mockup" aria-hidden="true">
-      <div class="mockup-tv">
-        <div class="mockup-tile" data-label="SHADOW PROTOCOL"></div>
-        <div class="mockup-tile" data-label="CHEF'S QUEST"></div>
-        <div class="mockup-tile" data-label="ORIGIN HORIZON"></div>
-        <div class="mockup-tile" data-label="CYCLING ROUTINES"></div>
-        <div class="mockup-tile" data-label="FREEHON ENYO ITI"></div>
-        <div class="mockup-tile" data-label="EVANTI"></div>
-      </div>
-      <div class="mockup-phone">
-        <div class="mp-title">Dashboard</div>
-        <div class="mp-card">
-          <div class="mp-pts-block">
-            <div class="mp-pts-label">Your Points</div>
-            <div class="mp-pts">3,000<span class="small">| $20</span></div>
-            <div style="font-size:6px; color:#5a5d80; margin-top:2px;">points · worth in cash</div>
-          </div>
-          <div class="mp-line">You've earned reward points <strong>$10</strong></div>
-          <div class="mp-line">Rewards redeemed <strong>$10</strong></div>
-          <div class="mp-btn">Redeem</div>
-        </div>
-      </div>
-      <div class="mp-powered">
-        Powered by
-        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21.4551 2.77276C22.7358 2.77276 23.7147 3.10208 24.3643 3.75167C26.6667 6.05405 24.9851 12.8662 18.8908 18.9601C14.9714 22.8794 10.1438 25.412 6.59235 25.412C5.31083 25.412 4.3319 25.0827 3.6823 24.4331C1.37991 22.1308 3.06148 15.3186 9.15582 9.22474C13.0752 5.30536 17.9028 2.77276 21.4555 2.77276" fill="#32BBB9"/>
-        </svg>
-        <strong style="font-weight:700;">Nielsen</strong>
-      </div>
+      <img src="/assets/hero-mockup.png" alt="" loading="lazy" />
     </div>
   </section>
 
