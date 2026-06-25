@@ -179,103 +179,6 @@
       margin: 0 0 36px;
     }
 
-    /* Referral code box */
-    .code-box {
-      width: 100%;
-      max-width: 440px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 18px;
-      margin: 0 auto 16px;
-      text-align: left;
-    }
-    @media (min-width: 720px) { .code-box { padding: 22px; } }
-    .code-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: #ff6b6b;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      transition: color .3s ease;
-    }
-    .code-label.verified { color: #22c55e; }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: rgba(255,107,107,.1);
-      color: #ff6b6b;
-      border: 1px solid rgba(255,107,107,.3);
-      margin-bottom: 12px;
-      transition: all .3s ease;
-    }
-    .status-pill .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: currentColor;
-      box-shadow: 0 0 8px currentColor;
-      animation: pulseDot 2s ease-in-out infinite;
-    }
-    .status-pill.verifying {
-      background: rgba(255,193,7,.1);
-      color: #ffc107;
-      border-color: rgba(255,193,7,.3);
-    }
-    .status-pill.verified {
-      background: rgba(34,197,94,.12);
-      color: #22c55e;
-      border-color: rgba(34,197,94,.35);
-    }
-    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    .ref-num {
-      margin-top: 10px;
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-    .ref-num .pre { color: rgba(255,255,255,.4); }
-    .code-input {
-      width: 100%;
-      background: rgba(255,255,255,.06);
-      border: 1.5px solid rgba(255,255,255,.18);
-      border-radius: 12px;
-      padding: 16px 18px;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      outline: none;
-      transition: border-color .15s;
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      text-transform: uppercase;
-    }
-    .code-input::placeholder { color: var(--muted); font-weight: 500; letter-spacing: 0.02em; text-transform: none; }
-    .code-input:focus { border-color: var(--cyan); background: rgba(50,187,185,.06); }
-    .code-help {
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .code-err {
-      display: none;
-      margin-top: 10px;
-      font-size: 13px;
-      color: #ff6b6b;
-      font-weight: 600;
-    }
-    .code-err.show { display: block; }
-
     .cta-btn {
       display: inline-flex;
       align-items: center;
@@ -300,15 +203,6 @@
     .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 50px -10px rgba(124,92,255,.7); }
     .cta-btn:active { transform: translateY(0); }
     .cta-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
-    .cta-btn .spin {
-      width: 16px; height: 16px;
-      border: 2px solid rgba(255,255,255,.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spinAnim 0.8s linear infinite;
-      display: inline-block;
-    }
-    @keyframes spinAnim { to { transform: rotate(360deg); } }
     .terms-link {
       display: block;
       margin-top: 14px;
@@ -593,24 +487,7 @@
       <h1 class="hero-h1">Get Paid to Test Apps and Share Your Screen Time.</h1>
       <h2 class="hero-h2">Continue Your Onboarding</h2>
 
-      <div class="code-box">
-        <label class="code-label" id="codeLabel" for="refCode">Enter Your Applicant Referral Code</label>
-        <input
-          id="refCode"
-          class="code-input"
-          type="text"
-          placeholder="Enter the code you were given"
-          autocomplete="off"
-          autocapitalize="characters"
-          spellcheck="false"
-          maxlength="32"
-        />
-        <div class="code-help" id="codeHelp">Don't have a code? Contact your onboarding agent.</div>
-        <div class="code-err" id="codeErr">Please enter a valid referral code.</div>
-        <div class="ref-num" id="refNum"><span class="pre">Application #</span><span id="refNumVal">AT-—</span></div>
-      </div>
-
-      <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
+      <button class="cta-btn" id="go" type="button">Start Onboarding →</button>
       <a href="https://trk.ssaff.link/nielsen-terms" class="terms-link" target="_blank" rel="noopener">*Terms Apply</a>
 
       <div class="trust">
@@ -725,72 +602,26 @@
     var ROTATOR = "https://trk.ssaff.link/mb-32298";
     var BRAND_SLUG = "ato";
 
-    var refInput = document.getElementById('refCode');
     var goBtn = document.getElementById('go');
-    var errEl = document.getElementById('codeErr');
-    var labelEl = document.getElementById('codeLabel');
-    var refNumVal = document.getElementById('refNumVal');
-
-    var MIN_LEN = 4;
-
-    function pad(n){ return String(n).padStart(2, '0'); }
-    function todayStr(){
-      var d = new Date();
-      return d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
-    }
-    function buildRef(code){
-      var clean = (code || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-      var suffix = clean ? clean.slice(0, 6) : '—';
-      return 'AT-' + todayStr() + '-' + suffix;
-    }
-
-    refInput.addEventListener('input', function(){
-      var v = refInput.value.trim();
-      goBtn.disabled = v.length < MIN_LEN;
-      if (errEl.classList.contains('show')) errEl.classList.remove('show');
-      refNumVal.textContent = v ? buildRef(v) : 'AT-—';
-    });
 
     function readCookie(name){
       var m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]*)'));
       return m ? decodeURIComponent(m[2]) : null;
     }
 
+    // Silent per-agent attribution via URL ?ref=XYZ (no UI exposed to user)
+    var refFromUrl = (new URLSearchParams(window.location.search)).get('ref') || (new URLSearchParams(window.location.search)).get('code') || null;
+
     goBtn.onclick = function(){
-      var code = refInput.value.trim().toUpperCase();
-      if (code.length < MIN_LEN) {
-        errEl.classList.add('show');
-        refInput.focus();
-        return;
-      }
-
-      // 1) Verifying state
       goBtn.disabled = true;
-      goBtn.innerHTML = '<span class="spin"></span> Verifying your code…';
-
+      goBtn.innerHTML = 'Loading…';
       var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || 'direct';
-      // Path-suffix: [s1]=cmc_vid · [s2]=brand · [s3]=referral code (per-VA attribution)
-      var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG + '/' + encodeURIComponent(code);
-
-      // 2) Flip label to verified after 1.8s
-      setTimeout(function(){
-        labelEl.classList.add('verified');
-        goBtn.innerHTML = 'Continuing…';
-        try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: code}); } catch(e){}
-        // 3) Redirect shortly after the verified state shows
-        setTimeout(function(){ window.location.href = href; }, 650);
-      }, 1800);
+      // Base path-suffix: [s1]=cmc_vid · [s2]=brand · (optional [s3]=ref code if present in URL)
+      var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG;
+      if (refFromUrl) href += '/' + encodeURIComponent(refFromUrl.toUpperCase());
+      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_start', ref_code: refFromUrl || null}); } catch(e){}
+      window.location.href = href;
     };
-
-    // Auto-fill ref code from URL ?ref=XYZ so VAs can give pre-filled links
-    (function(){
-      var qp = new URLSearchParams(window.location.search);
-      var prefill = qp.get('ref') || qp.get('code');
-      if (prefill) {
-        refInput.value = prefill.toUpperCase();
-        refInput.dispatchEvent(new Event('input'));
-      }
-    })();
 
     // Sticky mobile CTA
     var sticky = document.getElementById('stickyCta');
