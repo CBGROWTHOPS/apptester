@@ -31,16 +31,18 @@
       line-height: 1.5;
     }
     a { color: inherit; text-decoration: none; }
-    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+    @media (min-width: 720px) { .container { padding: 0 24px; } }
 
     /* HEADER */
     header {
-      padding: 18px 0;
+      padding: 14px 0;
       position: sticky;
       top: 0;
       background: var(--bg);
       z-index: 50;
     }
+    @media (min-width: 720px) { header { padding: 18px 0; } }
     .nav {
       display: flex;
       align-items: center;
@@ -110,7 +112,10 @@
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 60px 0 120px;
+      padding: 40px 0 80px;
+    }
+    @media (min-width: 720px) {
+      .hero { padding: 60px 0 120px; }
     }
     .hero::before {
       content: "";
@@ -129,6 +134,138 @@
       max-width: 640px;
       margin: 0 auto;
     }
+
+    /* HERO MOCKUP — bottom right, desktop only */
+    .hero-mockup {
+      display: none;
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 380px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .9;
+    }
+    @media (min-width: 1024px) {
+      .hero-mockup { display: block; }
+      .hero-grid { padding-right: 40px; }
+    }
+    .mockup-tv {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #1a1640, #0a0820);
+      border: 1px solid rgba(124,92,255,.25);
+      border-radius: 14px;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
+      padding: 24px 14px 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mockup-tv::before {
+      content: "Shows & Movies";
+      position: absolute;
+      top: 8px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: rgba(255,255,255,.5);
+    }
+    .mockup-tile {
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      opacity: .85;
+      position: relative;
+      overflow: hidden;
+    }
+    .mockup-tile::after {
+      content: attr(data-label);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 3px rgba(0,0,0,.6);
+      text-align: center;
+      padding: 0 4px;
+    }
+    .mockup-tile:nth-child(1) { background: linear-gradient(135deg, #1a4d7a, #0a2540); }
+    .mockup-tile:nth-child(2) { background: linear-gradient(135deg, #b8860b, #6b4900); }
+    .mockup-tile:nth-child(3) { background: linear-gradient(135deg, #6b1d3a, #2d0814); }
+    .mockup-tile:nth-child(4) { background: linear-gradient(135deg, #4d2380, #1a0840); }
+    .mockup-tile:nth-child(5) { background: linear-gradient(135deg, #ff6b35, #b13e1a); }
+    .mockup-tile:nth-child(6) { background: linear-gradient(135deg, #2a5d40, #0e2818); }
+
+    .mockup-phone {
+      position: absolute;
+      bottom: -10px;
+      left: -30px;
+      width: 130px;
+      background: #0a0820;
+      border: 2.5px solid #2a2548;
+      border-radius: 20px;
+      padding: 12px 10px 10px;
+      box-shadow: 0 30px 50px -15px rgba(0,0,0,.85);
+    }
+    .mp-title { font-size: 10px; font-weight: 700; color: white; padding: 0 2px; }
+    .mp-card {
+      background: white;
+      color: #0a0820;
+      border-radius: 8px;
+      padding: 8px 8px;
+      margin-top: 8px;
+      font-size: 8px;
+    }
+    .mp-pts-block {
+      background: #f0f4ff;
+      border-radius: 6px;
+      padding: 5px 6px;
+      margin-bottom: 6px;
+    }
+    .mp-pts-label { font-size: 7px; color: #5a5d80; }
+    .mp-pts { font-weight: 800; color: var(--purple); font-size: 14px; line-height: 1; margin-top: 2px; }
+    .mp-pts .small { font-size: 9px; font-weight: 700; color: #0a0820; margin-left: 4px; }
+    .mp-line {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 2px;
+      border-top: 1px solid #eef;
+      font-size: 7px;
+      color: #5a5d80;
+    }
+    .mp-line strong { color: var(--purple); font-size: 8px; }
+    .mp-btn {
+      background: var(--purple);
+      color: white;
+      text-align: center;
+      padding: 6px;
+      border-radius: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+    .mp-powered {
+      position: absolute;
+      bottom: -28px;
+      right: 0;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 999px;
+      padding: 5px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      color: white;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .mp-powered svg { width: 12px; height: 12px; }
     .hero-h1 {
       font-size: clamp(36px, 6vw, 56px);
       line-height: 1.05;
@@ -152,10 +289,11 @@
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 16px;
-      padding: 22px;
+      padding: 18px;
       margin: 0 auto 16px;
       text-align: left;
     }
+    @media (min-width: 720px) { .code-box { padding: 22px; } }
     .code-label {
       display: block;
       font-size: 12px;
@@ -284,82 +422,18 @@
     }
     .terms-link:hover { color: var(--text); }
 
-    /* APP PREVIEW CARD */
-    .app-card {
-      margin-top: 28px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 18px;
-      padding: 18px 20px;
-      max-width: 440px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .app-card-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-align: left;
-    }
-    .app-icon {
-      width: 60px; height: 60px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #0a0820, #14102e);
-      border: 1px solid rgba(255,255,255,.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      padding: 10px;
-    }
-    .app-icon svg, .app-icon img { width: 100%; height: 100%; }
-    .app-meta { flex: 1; min-width: 0; }
-    .app-name {
-      font-size: 15px;
-      font-weight: 700;
-      color: white;
-      margin: 0 0 2px;
-    }
-    .app-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin: 0 0 5px;
-    }
-    .app-rating {
+    /* RATING ROW (under CTA) */
+    .rating-row {
+      margin-top: 22px;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 12px;
+      gap: 6px;
+      font-size: 14px;
       color: white;
       font-weight: 600;
     }
-    .app-rating .stars { color: #fbbf24; letter-spacing: -1px; }
-    .app-rating .count { color: var(--muted); font-weight: 500; }
-    .store-badges {
-      display: flex;
-      gap: 8px;
-      padding-top: 4px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      padding-top: 14px;
-    }
-    .badge {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #000;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 8px;
-      padding: 7px 10px;
-      text-align: left;
-      cursor: default;
-    }
-    .badge svg { flex-shrink: 0; }
-    .badge-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .badge-small { font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 0.02em; }
-    .badge-big { font-size: 13px; font-weight: 600; color: white; letter-spacing: 0.01em; }
+    .rating-row .stars { color: #fbbf24; letter-spacing: -1px; font-size: 15px; }
+    .rating-row .count { color: var(--muted); font-weight: 500; }
 
     .trust {
       margin-top: 36px;
@@ -384,19 +458,25 @@
     .how {
       background: var(--light);
       color: #0a0820;
-      padding: 80px 0 100px;
-      border-radius: 32px 32px 0 0;
-      margin-top: -40px;
+      padding: 60px 0 70px;
+      border-radius: 28px 28px 0 0;
+      margin-top: -20px;
       position: relative;
       z-index: 2;
     }
+    @media (min-width: 720px) {
+      .how { padding: 80px 0 100px; border-radius: 32px 32px 0 0; margin-top: -40px; }
+    }
     .how-card {
       background: white;
-      border-radius: 24px;
-      padding: 50px 30px;
+      border-radius: 20px;
+      padding: 30px 20px;
       max-width: 920px;
       margin: 0 auto;
       box-shadow: 0 20px 50px -20px rgba(124,92,255,.18);
+    }
+    @media (min-width: 720px) {
+      .how-card { border-radius: 24px; padding: 50px 30px; }
     }
     .how-h {
       font-size: clamp(28px, 4vw, 38px);
@@ -444,13 +524,14 @@
     }
     .why-card {
       max-width: 920px;
-      margin: 40px auto 0;
+      margin: 0 auto;
       background: linear-gradient(135deg, var(--bg-2), #1a1640);
       color: white;
-      padding: 50px 36px;
-      border-radius: 24px;
+      padding: 36px 22px;
+      border-radius: 20px;
       text-align: center;
     }
+    @media (min-width: 720px) { .why-card { padding: 50px 36px; border-radius: 24px; margin: 40px auto 0; } }
     .why-h { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; margin: 0 0 14px; letter-spacing: -0.02em; }
     .why-p { font-size: 16px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
     .why-cta {
@@ -561,12 +642,13 @@
       bottom: 0; left: 0; right: 0;
       background: var(--light-2);
       color: #0a0820;
-      padding: 14px 20px;
+      padding: 12px 16px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      box-shadow: 0 -10px 30px rgba(0,0,0,.1);
+      gap: 10px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,.15);
       z-index: 40;
       transform: translateY(120%);
       transition: transform .4s ease;
@@ -631,24 +713,10 @@
       <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
       <a href="https://trk.ssaff.link/nielsen-terms" class="terms-link" target="_blank" rel="noopener">*Terms Apply</a>
 
-      <div class="app-card" aria-label="App preview">
-        <div class="app-card-row">
-          <div class="app-icon">
-            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21.4551 2.77276C22.7358 2.77276 23.7147 3.10208 24.3643 3.75167C26.6667 6.05405 24.9851 12.8662 18.8908 18.9601C14.9714 22.8794 10.1438 25.412 6.59235 25.412C5.31083 25.412 4.3319 25.0827 3.6823 24.4331C1.37991 22.1308 3.06148 15.3186 9.15582 9.22474C13.0752 5.30536 17.9028 2.77276 21.4555 2.77276M21.4543 0.509033C17.414 0.509033 12.0938 3.08522 7.55483 7.62418C0.959725 14.2192 -1.49108 22.4621 2.08132 26.0345C3.1951 27.1483 4.76195 27.6766 6.59235 27.6766C10.6326 27.6766 15.9528 25.1004 20.4918 20.5614C27.0869 13.9664 29.5377 5.72349 25.9653 2.15112C24.8515 1.03734 23.2847 0.509033 21.4543 0.509033Z" fill="#32BBB9"/>
-              <path d="M6.66845 2.73596C10.2199 2.75611 15.0331 5.31585 18.9303 9.25743C24.9901 15.3858 26.633 22.207 24.3179 24.4967C23.6646 25.1426 22.6836 25.4661 21.4025 25.4591C17.8511 25.439 13.0378 22.8792 9.14064 18.9377C3.08083 12.8092 1.43792 5.98806 3.75305 3.69844C4.40635 3.05254 5.38733 2.72897 6.66886 2.73596M6.68078 0.471829C4.85121 0.461551 3.28065 0.981228 2.1607 2.08842C-1.43185 5.64065 0.972094 13.8967 7.5302 20.5292C12.0441 25.094 17.3491 27.6998 21.3893 27.7224C23.2189 27.7327 24.7895 27.213 25.9094 26.1058C29.502 22.5536 27.098 14.2976 20.5399 7.66509C16.026 3.10023 10.7211 0.494442 6.68078 0.471829Z" fill="#32BBB9"/>
-            </svg>
-          </div>
-          <div class="app-meta">
-            <div class="app-name">Nielsen Pulse</div>
-            <div class="app-sub">~27 MB · Free · Research panel</div>
-            <div class="app-rating">
-              <span class="stars">★★★★★</span>
-              <strong>4.6</strong>
-              <span class="count">· 12,400 reviews</span>
-            </div>
-          </div>
-        </div>
+      <div class="rating-row" aria-label="App rating">
+        <span class="stars">★★★★★</span>
+        <strong>4.6</strong>
+        <span class="count">· 12,400 reviews</span>
       </div>
 
       <div class="trust">
@@ -659,6 +727,38 @@
           <img src="https://images.pexels.com/photos/16869444/pexels-photo-16869444.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
         </div>
         <span class="trust-txt">Trusted by panelists across the US.</span>
+      </div>
+    </div>
+
+    <!-- Hero mockup (desktop only, absolute bottom-right) -->
+    <div class="hero-mockup" aria-hidden="true">
+      <div class="mockup-tv">
+        <div class="mockup-tile" data-label="SHADOW PROTOCOL"></div>
+        <div class="mockup-tile" data-label="CHEF'S QUEST"></div>
+        <div class="mockup-tile" data-label="ORIGIN HORIZON"></div>
+        <div class="mockup-tile" data-label="CYCLING ROUTINES"></div>
+        <div class="mockup-tile" data-label="FREEHON ENYO ITI"></div>
+        <div class="mockup-tile" data-label="EVANTI"></div>
+      </div>
+      <div class="mockup-phone">
+        <div class="mp-title">Dashboard</div>
+        <div class="mp-card">
+          <div class="mp-pts-block">
+            <div class="mp-pts-label">Your Points</div>
+            <div class="mp-pts">3,000<span class="small">| $20</span></div>
+            <div style="font-size:6px; color:#5a5d80; margin-top:2px;">points · worth in cash</div>
+          </div>
+          <div class="mp-line">You've earned reward points <strong>$10</strong></div>
+          <div class="mp-line">Rewards redeemed <strong>$10</strong></div>
+          <div class="mp-btn">Redeem</div>
+        </div>
+      </div>
+      <div class="mp-powered">
+        Powered by
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.4551 2.77276C22.7358 2.77276 23.7147 3.10208 24.3643 3.75167C26.6667 6.05405 24.9851 12.8662 18.8908 18.9601C14.9714 22.8794 10.1438 25.412 6.59235 25.412C5.31083 25.412 4.3319 25.0827 3.6823 24.4331C1.37991 22.1308 3.06148 15.3186 9.15582 9.22474C13.0752 5.30536 17.9028 2.77276 21.4555 2.77276" fill="#32BBB9"/>
+        </svg>
+        <strong style="font-weight:700;">Nielsen</strong>
       </div>
     </div>
   </section>
