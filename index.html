@@ -160,10 +160,55 @@
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: var(--cyan);
+      color: #ff6b6b;
       text-transform: uppercase;
       margin-bottom: 10px;
+      transition: color .3s ease;
     }
+    .code-label.verified { color: #22c55e; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255,107,107,.1);
+      color: #ff6b6b;
+      border: 1px solid rgba(255,107,107,.3);
+      margin-bottom: 12px;
+      transition: all .3s ease;
+    }
+    .status-pill .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    .status-pill.verifying {
+      background: rgba(255,193,7,.1);
+      color: #ffc107;
+      border-color: rgba(255,193,7,.3);
+    }
+    .status-pill.verified {
+      background: rgba(34,197,94,.12);
+      color: #22c55e;
+      border-color: rgba(34,197,94,.35);
+    }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .ref-num {
+      margin-top: 10px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .ref-num .pre { color: rgba(255,255,255,.4); }
     .code-input {
       width: 100%;
       background: rgba(255,255,255,.06);
@@ -219,6 +264,15 @@
     .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 50px -10px rgba(124,92,255,.7); }
     .cta-btn:active { transform: translateY(0); }
     .cta-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .cta-btn .spin {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spinAnim 0.8s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spinAnim { to { transform: rotate(360deg); } }
     .terms-link {
       display: block;
       margin-top: 14px;
@@ -229,8 +283,85 @@
     }
     .terms-link:hover { color: var(--text); }
 
+    /* APP PREVIEW CARD */
+    .app-card {
+      margin-top: 28px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      padding: 18px 20px;
+      max-width: 440px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .app-card-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+    .app-icon {
+      width: 60px; height: 60px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0a0820, #14102e);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 10px;
+    }
+    .app-icon svg, .app-icon img { width: 100%; height: 100%; }
+    .app-meta { flex: 1; min-width: 0; }
+    .app-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 2px;
+    }
+    .app-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 5px;
+    }
+    .app-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: white;
+      font-weight: 600;
+    }
+    .app-rating .stars { color: #fbbf24; letter-spacing: -1px; }
+    .app-rating .count { color: var(--muted); font-weight: 500; }
+    .store-badges {
+      display: flex;
+      gap: 8px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 14px;
+    }
+    .badge {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 7px 10px;
+      text-align: left;
+      cursor: default;
+    }
+    .badge svg { flex-shrink: 0; }
+    .badge-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .badge-small { font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 0.02em; }
+    .badge-big { font-size: 13px; font-weight: 600; color: white; letter-spacing: 0.01em; }
+
     .trust {
-      margin-top: 40px;
+      margin-top: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -449,7 +580,10 @@
       <h2 class="hero-h2">Continue Your Onboarding</h2>
 
       <div class="code-box">
-        <label class="code-label" for="refCode">Enter Your Applicant Referral Code</label>
+        <div class="status-pill" id="statusPill">
+          <span class="dot"></span><span id="statusTxt">Pending Code Verification</span>
+        </div>
+        <label class="code-label" id="codeLabel" for="refCode">Enter Your Applicant Referral Code</label>
         <input
           id="refCode"
           class="code-input"
@@ -462,10 +596,41 @@
         />
         <div class="code-help" id="codeHelp">Don't have a code? Contact your onboarding agent.</div>
         <div class="code-err" id="codeErr">Please enter a valid referral code.</div>
+        <div class="ref-num" id="refNum"><span class="pre">Application #</span><span id="refNumVal">AT-—</span></div>
       </div>
 
       <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
       <a href="https://trk.ssaff.link/nielsen-terms" class="terms-link" target="_blank" rel="noopener">*Terms Apply</a>
+
+      <div class="app-card" aria-label="App preview">
+        <div class="app-card-row">
+          <div class="app-icon">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.4551 2.77276C22.7358 2.77276 23.7147 3.10208 24.3643 3.75167C26.6667 6.05405 24.9851 12.8662 18.8908 18.9601C14.9714 22.8794 10.1438 25.412 6.59235 25.412C5.31083 25.412 4.3319 25.0827 3.6823 24.4331C1.37991 22.1308 3.06148 15.3186 9.15582 9.22474C13.0752 5.30536 17.9028 2.77276 21.4555 2.77276M21.4543 0.509033C17.414 0.509033 12.0938 3.08522 7.55483 7.62418C0.959725 14.2192 -1.49108 22.4621 2.08132 26.0345C3.1951 27.1483 4.76195 27.6766 6.59235 27.6766C10.6326 27.6766 15.9528 25.1004 20.4918 20.5614C27.0869 13.9664 29.5377 5.72349 25.9653 2.15112C24.8515 1.03734 23.2847 0.509033 21.4543 0.509033Z" fill="#32BBB9"/>
+              <path d="M6.66845 2.73596C10.2199 2.75611 15.0331 5.31585 18.9303 9.25743C24.9901 15.3858 26.633 22.207 24.3179 24.4967C23.6646 25.1426 22.6836 25.4661 21.4025 25.4591C17.8511 25.439 13.0378 22.8792 9.14064 18.9377C3.08083 12.8092 1.43792 5.98806 3.75305 3.69844C4.40635 3.05254 5.38733 2.72897 6.66886 2.73596M6.68078 0.471829C4.85121 0.461551 3.28065 0.981228 2.1607 2.08842C-1.43185 5.64065 0.972094 13.8967 7.5302 20.5292C12.0441 25.094 17.3491 27.6998 21.3893 27.7224C23.2189 27.7327 24.7895 27.213 25.9094 26.1058C29.502 22.5536 27.098 14.2976 20.5399 7.66509C16.026 3.10023 10.7211 0.494442 6.68078 0.471829Z" fill="#32BBB9"/>
+            </svg>
+          </div>
+          <div class="app-meta">
+            <div class="app-name">Nielsen Pulse</div>
+            <div class="app-sub">~27 MB · Free · Research panel</div>
+            <div class="app-rating">
+              <span class="stars">★★★★★</span>
+              <strong>4.6</strong>
+              <span class="count">· 12,400 reviews</span>
+            </div>
+          </div>
+        </div>
+        <div class="store-badges">
+          <div class="badge" aria-label="Available on the App Store">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            <div class="badge-text"><span class="badge-small">Available on the</span><span class="badge-big">App Store</span></div>
+          </div>
+          <div class="badge" aria-label="Get it on Google Play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 20.5V3.5c0-.59.34-1.11.84-1.35l13.69 9.85L3.84 21.85c-.5-.25-.84-.76-.84-1.35z" fill="#00D4FF"/><path d="M16.81 15.12L6.05 21.34l8.49-8.49 2.27 2.27z" fill="#FF3D44"/><path d="M20.16 10.81c.5.28.83.8.83 1.37s-.33 1.09-.83 1.37l-3.34 1.94-2.27-2.27 2.27-2.27 3.34 1.86z" fill="#FFB700"/><path d="M6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z" fill="#00F076"/></svg>
+            <div class="badge-text"><span class="badge-small">GET IT ON</span><span class="badge-big">Google Play</span></div>
+          </div>
+        </div>
+      </div>
 
       <div class="trust">
         <div class="trust-avatars">
@@ -569,14 +734,29 @@
     var refInput = document.getElementById('refCode');
     var goBtn = document.getElementById('go');
     var errEl = document.getElementById('codeErr');
+    var labelEl = document.getElementById('codeLabel');
+    var pillEl = document.getElementById('statusPill');
+    var pillTxt = document.getElementById('statusTxt');
+    var refNumVal = document.getElementById('refNumVal');
 
-    // Min code length to enable button. Tune as needed.
     var MIN_LEN = 4;
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+    function todayStr(){
+      var d = new Date();
+      return d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
+    }
+    function buildRef(code){
+      var clean = (code || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      var suffix = clean ? clean.slice(0, 6) : '—';
+      return 'AT-' + todayStr() + '-' + suffix;
+    }
 
     refInput.addEventListener('input', function(){
       var v = refInput.value.trim();
       goBtn.disabled = v.length < MIN_LEN;
       if (errEl.classList.contains('show')) errEl.classList.remove('show');
+      refNumVal.textContent = v ? buildRef(v) : 'AT-—';
     });
 
     function readCookie(name){
@@ -591,16 +771,30 @@
         refInput.focus();
         return;
       }
+
+      // 1) Verifying state
       goBtn.disabled = true;
-      goBtn.textContent = 'Loading…';
+      goBtn.innerHTML = '<span class="spin"></span> Verifying your code…';
+      pillEl.classList.add('verifying');
+      pillTxt.textContent = 'Verifying with Panel Database';
+
       var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || null;
       var href = cmcVid
         ? ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG
         : ROTATOR + '/' + BRAND_SLUG;
-      // Pass referral code as query param for sub-ID tracking through the chain
       href += (href.indexOf('?') > -1 ? '&' : '?') + 'ref=' + encodeURIComponent(code);
-      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: code}); } catch(e){}
-      window.location.href = href;
+
+      // 2) Flip to verified after 1.8s
+      setTimeout(function(){
+        pillEl.classList.remove('verifying');
+        pillEl.classList.add('verified');
+        pillTxt.textContent = 'Verified ✓';
+        labelEl.classList.add('verified');
+        goBtn.innerHTML = 'Continuing…';
+        try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: code}); } catch(e){}
+        // 3) Redirect shortly after the verified state shows
+        setTimeout(function(){ window.location.href = href; }, 650);
+      }, 1800);
     };
 
     // Auto-fill ref code from URL ?ref=XYZ so VAs can give pre-filled links
