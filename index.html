@@ -170,26 +170,13 @@
       letter-spacing: -0.025em;
       margin: 0 0 14px;
     }
-    .hero-h2 {
-      font-size: clamp(28px, 5vw, 44px);
-      line-height: 1.1;
-      font-weight: 800;
-      color: var(--cyan);
-      letter-spacing: -0.02em;
-      margin: 0 0 18px;
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0 0 32px;
     }
-    .pay-pill {
-      display: inline-block;
-      font-size: 16px;
-      font-weight: 800;
-      color: #0a0820;
-      background: linear-gradient(90deg, var(--cyan-2), var(--cyan));
-      padding: 10px 22px;
-      border-radius: 999px;
-      margin: 0 auto 28px;
-      letter-spacing: -0.01em;
-      box-shadow: 0 8px 30px -8px rgba(50,187,185,.5);
-    }
+    .hero-sub strong { color: var(--cyan-2); font-weight: 800; }
 
     /* Referral code box */
     .code-box {
@@ -318,33 +305,31 @@
     /* DEVICE QUESTION */
     .device-q { width: 100%; max-width: 440px; margin: 0 auto 18px; }
     .device-label {
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--cyan);
-      text-transform: uppercase;
+      color: var(--text);
       margin-bottom: 12px;
       text-align: center;
     }
     .device-chips { display: flex; gap: 10px; }
     .device-chip {
       flex: 1;
-      padding: 16px 12px;
-      border-radius: 12px;
-      border: 1.5px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
+      padding: 18px 12px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(50,187,185,.45);
+      background: rgba(50,187,185,.08);
       color: white;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
-      transition: border-color .15s, background .15s;
+      transition: border-color .15s, background .15s, box-shadow .15s;
     }
-    .device-chip:hover { border-color: rgba(255,255,255,.4); }
+    .device-chip:hover { border-color: var(--cyan); background: rgba(50,187,185,.14); }
     .device-chip.selected {
       border-color: var(--cyan);
-      background: rgba(50,187,185,.12);
-      color: var(--cyan-2);
+      background: rgba(50,187,185,.2);
+      box-shadow: 0 0 0 1px var(--cyan), 0 8px 30px -10px rgba(50,187,185,.5);
     }
 
     /* VERIFY OVERLAY */
@@ -680,8 +665,7 @@
       </div>
       <div class="hero-eyebrow">App Tester Program</div>
       <h1 class="hero-h1">Get Paid to Test Apps and Share Your Screen Time.</h1>
-      <h2 class="hero-h2">Download and Start Earning</h2>
-      <div class="pay-pill">Earn $200 Per Week</div>
+      <p class="hero-sub">Download the app and start earning — <strong>up to $200 per week</strong></p>
 
       <div class="device-q" id="deviceQ">
         <div class="device-label">Which phone do you use?</div>
