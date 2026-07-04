@@ -300,6 +300,83 @@
     .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 50px -10px rgba(124,92,255,.7); }
     .cta-btn:active { transform: translateY(0); }
     .cta-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+    #go { display: none; }
+    #go.show { display: inline-flex; }
+
+    /* DEVICE QUESTION */
+    .device-q { width: 100%; max-width: 440px; margin: 0 auto 18px; }
+    .device-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .device-chips { display: flex; gap: 10px; }
+    .device-chip {
+      flex: 1;
+      padding: 16px 12px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color .15s, background .15s;
+    }
+    .device-chip:hover { border-color: rgba(255,255,255,.4); }
+    .device-chip.selected {
+      border-color: var(--cyan);
+      background: rgba(50,187,185,.12);
+      color: var(--cyan-2);
+    }
+
+    /* VERIFY OVERLAY */
+    .verify-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .verify-overlay.show { display: flex; }
+    .verify-box { width: 100%; max-width: 400px; }
+    .verify-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+    .verify-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--muted);
+      padding: 10px 0;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .verify-line.in { opacity: 1; transform: translateY(0); }
+    .verify-line.done { color: var(--light-2); }
+    .verify-line .ok { color: #22c55e; font-weight: 700; }
+    .verify-line .mini-spin {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,.25);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spinAnim .8s linear infinite;
+    }
     .cta-btn .spin {
       width: 16px; height: 16px;
       border: 2px solid rgba(255,255,255,.3);
@@ -577,7 +654,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14M5 8a7 7 0 1014 0M12 3v18"/></svg>
           English
         </span>
-        <a href="#hero-cta" class="btn-outline">Continue Onboarding</a>
+        <a href="#hero-cta" class="btn-outline">Start Onboarding</a>
       </div>
     </div>
   </header>
@@ -593,7 +670,15 @@
       <h1 class="hero-h1">Get Paid to Test Apps and Share Your Screen Time.</h1>
       <h2 class="hero-h2">Download and Start Earning</h2>
 
-      <button class="cta-btn" id="go" type="button">Continue Onboarding →</button>
+      <div class="device-q" id="deviceQ">
+        <div class="device-label">Which phone do you use?</div>
+        <div class="device-chips">
+          <button class="device-chip" type="button" data-device="iPhone (iOS)">iPhone / iOS</button>
+          <button class="device-chip" type="button" data-device="Android">Android</button>
+        </div>
+      </div>
+
+      <button class="cta-btn" id="go" type="button">Start Onboarding →</button>
       <a href="https://trk.ssaff.link/nielsen-terms" class="terms-link" target="_blank" rel="noopener">*Terms Apply</a>
 
       <div class="trust">
@@ -618,7 +703,7 @@
           <div class="step">
             <div class="step-num">1</div>
             <h4>Start Onboarding</h4>
-            <p>Tap the button above to begin your application.</p>
+            <p>Choose your device above and tap Start Onboarding to begin your application.</p>
           </div>
           <div class="step">
             <div class="step-num">2</div>
@@ -640,7 +725,7 @@
       <div class="why-card">
         <h3 class="why-h">Why we pay you</h3>
         <p class="why-p">Brands and researchers need real insight into how people actually use their phones. By joining the panel, you help shape the future of online products — and get rewarded for it.</p>
-        <button class="why-cta" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Continue Onboarding ↑</button>
+        <button class="why-cta" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Start Onboarding ↑</button>
       </div>
     </div>
   </section>
@@ -697,6 +782,16 @@
     </div>
   </footer>
 
+  <div class="verify-overlay" id="verifyOverlay" aria-live="polite">
+    <div class="verify-box">
+      <div class="verify-title">Setting up your onboarding</div>
+      <div class="verify-line" id="vl1"><span class="mini-spin"></span><span>Checking your connection…</span></div>
+      <div class="verify-line" id="vl2"><span class="mini-spin"></span><span>Confirming your device…</span></div>
+      <div class="verify-line" id="vl3"><span class="mini-spin"></span><span>Reserving your test slot…</span></div>
+      <div class="verify-line" id="vl4"><span class="mini-spin"></span><span>Routing you to the eligibility check…</span></div>
+    </div>
+  </div>
+
   <div class="sticky-cta" id="stickyCta">
     <div class="sticky-cta-txt">Ready to start?</div>
     <button class="sticky-cta-btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Continue ↑</button>
@@ -709,6 +804,8 @@
     var BRAND_SLUG = "ato";
 
     var goBtn = document.getElementById('go');
+    var overlay = document.getElementById('verifyOverlay');
+    var selectedDevice = null;
 
     function readCookie(name){
       var m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]*)'));
@@ -719,16 +816,52 @@
     var qp = new URLSearchParams(window.location.search);
     var refCode = (qp.get('ref') || qp.get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 
+    // Device question → reveal CTA
+    var chips = document.querySelectorAll('.device-chip');
+    chips.forEach(function(ch){
+      ch.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('selected'); });
+        ch.classList.add('selected');
+        selectedDevice = ch.getAttribute('data-device');
+        goBtn.classList.add('show');
+      });
+    });
+
+    // Prefetch IP location so it's ready by the time they click
+    var geoTxt = 'United States';
+    try {
+      fetch('https://get.geojs.io/v1/ip/geo.json')
+        .then(function(r){ return r.json(); })
+        .then(function(j){ if (j && j.city) geoTxt = j.city + (j.region ? ', ' + j.region : ''); })
+        .catch(function(){});
+    } catch(e){}
+
+    function completeLine(el, text){
+      el.innerHTML = '<span class="ok">✓</span><span>' + text + '</span>';
+      el.classList.add('done');
+    }
+
     goBtn.onclick = function(){
-      goBtn.disabled = true;
-      goBtn.innerHTML = '<span class="spin"></span> Preparing your onboarding…';
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
 
       var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || 'direct';
       // Path-suffix: [s1]=cmc_vid · [s2]=brand · [s3]=referral code (when present)
       var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG + (refCode ? '/' + encodeURIComponent(refCode) : '');
 
-      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: refCode || 'none'}); } catch(e){}
-      setTimeout(function(){ window.location.href = href; }, 900);
+      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: refCode || 'none', device: selectedDevice || 'unknown'}); } catch(e){}
+
+      var vl1 = document.getElementById('vl1'), vl2 = document.getElementById('vl2'),
+          vl3 = document.getElementById('vl3'), vl4 = document.getElementById('vl4');
+
+      setTimeout(function(){ vl1.classList.add('in'); }, 150);
+      setTimeout(function(){ completeLine(vl1, 'Connected from ' + geoTxt); }, 1100);
+      setTimeout(function(){ vl2.classList.add('in'); }, 1250);
+      setTimeout(function(){ completeLine(vl2, 'Device confirmed: ' + (selectedDevice || 'Mobile')); }, 2000);
+      setTimeout(function(){ vl3.classList.add('in'); }, 2150);
+      setTimeout(function(){ completeLine(vl3, 'Test slot reserved'); }, 2900);
+      setTimeout(function(){ vl4.classList.add('in'); }, 3050);
+      setTimeout(function(){ window.location.href = href; }, 4400);
     };
 
     // Sticky mobile CTA
