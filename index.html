@@ -593,24 +593,7 @@
       <h1 class="hero-h1">Get Paid to Test Apps and Share Your Screen Time.</h1>
       <h2 class="hero-h2">Continue Your Onboarding</h2>
 
-      <div class="code-box">
-        <label class="code-label" id="codeLabel" for="refCode">Enter Your Applicant Referral Code</label>
-        <input
-          id="refCode"
-          class="code-input"
-          type="text"
-          placeholder="Enter the code you were given"
-          autocomplete="off"
-          autocapitalize="characters"
-          spellcheck="false"
-          maxlength="32"
-        />
-        <div class="code-help" id="codeHelp">Don't have a code? Contact your onboarding agent.</div>
-        <div class="code-err" id="codeErr">Please enter a valid referral code.</div>
-        <div class="ref-num" id="refNum"><span class="pre">Application #</span><span id="refNumVal">AT-—</span></div>
-      </div>
-
-      <button class="cta-btn" id="go" type="button" disabled>Continue Onboarding →</button>
+      <button class="cta-btn" id="go" type="button">Continue Onboarding →</button>
       <a href="https://trk.ssaff.link/nielsen-terms" class="terms-link" target="_blank" rel="noopener">*Terms Apply</a>
 
       <div class="trust">
@@ -634,8 +617,8 @@
         <div class="how-steps">
           <div class="step">
             <div class="step-num">1</div>
-            <h4>Get Your Code</h4>
-            <p>Receive your referral code from your onboarding agent, then enter it above to continue your application.</p>
+            <h4>Start Onboarding</h4>
+            <p>Tap the button above to begin your application.</p>
           </div>
           <div class="step">
             <div class="step-num">2</div>
@@ -657,7 +640,7 @@
       <div class="why-card">
         <h3 class="why-h">Why we pay you</h3>
         <p class="why-p">Brands and researchers need real insight into how people actually use their phones. By joining the panel, you help shape the future of online products — and get rewarded for it.</p>
-        <button class="why-cta" type="button" onclick="document.getElementById('refCode').focus(); window.scrollTo({top:0,behavior:'smooth'});">Continue Onboarding ↑</button>
+        <button class="why-cta" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Continue Onboarding ↑</button>
       </div>
     </div>
   </section>
@@ -666,8 +649,8 @@
     <div class="container faq-wrap">
       <h3 class="faq-h">Frequently Asked Questions</h3>
       <details class="faq-item">
-        <summary class="faq-q">What is the referral code?</summary>
-        <div class="faq-a">Your referral code is provided by your onboarding agent after you've been pre-qualified. It links your application to your agent and unlocks the next step of onboarding.</div>
+        <summary class="faq-q">How does onboarding work?</summary>
+        <div class="faq-a">Tap Continue Onboarding above, install the app, and finish the in-app setup. The whole thing takes about five minutes.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">What kind of data does Nielsen Pulse collect?</summary>
@@ -679,7 +662,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-q">Who qualifies?</summary>
-        <div class="faq-a">US residents 18+ with a supported iPhone, iPad, or Android device. Your onboarding agent confirms eligibility before issuing a referral code.</div>
+        <div class="faq-a">US residents 18+ with a supported iPhone, iPad, or Android device. Your onboarding agent confirms eligibility before you continue.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Can I leave the panel anytime?</summary>
@@ -715,8 +698,8 @@
   </footer>
 
   <div class="sticky-cta" id="stickyCta">
-    <div class="sticky-cta-txt">Have your code?</div>
-    <button class="sticky-cta-btn" type="button" onclick="document.getElementById('refCode').focus(); window.scrollTo({top:0,behavior:'smooth'});">Continue ↑</button>
+    <div class="sticky-cta-txt">Ready to start?</div>
+    <button class="sticky-cta-btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Continue ↑</button>
   </div>
 
   <script>
@@ -725,72 +708,28 @@
     var ROTATOR = "https://trk.ssaff.link/mb-32298";
     var BRAND_SLUG = "ato";
 
-    var refInput = document.getElementById('refCode');
     var goBtn = document.getElementById('go');
-    var errEl = document.getElementById('codeErr');
-    var labelEl = document.getElementById('codeLabel');
-    var refNumVal = document.getElementById('refNumVal');
-
-    var MIN_LEN = 4;
-
-    function pad(n){ return String(n).padStart(2, '0'); }
-    function todayStr(){
-      var d = new Date();
-      return d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
-    }
-    function buildRef(code){
-      var clean = (code || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-      var suffix = clean ? clean.slice(0, 6) : '—';
-      return 'AT-' + todayStr() + '-' + suffix;
-    }
-
-    refInput.addEventListener('input', function(){
-      var v = refInput.value.trim();
-      goBtn.disabled = v.length < MIN_LEN;
-      if (errEl.classList.contains('show')) errEl.classList.remove('show');
-      refNumVal.textContent = v ? buildRef(v) : 'AT-—';
-    });
 
     function readCookie(name){
       var m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]*)'));
       return m ? decodeURIComponent(m[2]) : null;
     }
 
-    goBtn.onclick = function(){
-      var code = refInput.value.trim().toUpperCase();
-      if (code.length < MIN_LEN) {
-        errEl.classList.add('show');
-        refInput.focus();
-        return;
-      }
+    // Silent per-VA attribution: ?ref=CODE (or ?code=) from VA links passes through as [s3]
+    var qp = new URLSearchParams(window.location.search);
+    var refCode = (qp.get('ref') || qp.get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 
-      // 1) Verifying state
+    goBtn.onclick = function(){
       goBtn.disabled = true;
-      goBtn.innerHTML = '<span class="spin"></span> Verifying your code…';
+      goBtn.innerHTML = '<span class="spin"></span> Preparing your onboarding…';
 
       var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || 'direct';
-      // Path-suffix: [s1]=cmc_vid · [s2]=brand · [s3]=referral code (per-VA attribution)
-      var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG + '/' + encodeURIComponent(code);
+      // Path-suffix: [s1]=cmc_vid · [s2]=brand · [s3]=referral code (when present)
+      var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG + (refCode ? '/' + encodeURIComponent(refCode) : '');
 
-      // 2) Flip label to verified after 1.8s
-      setTimeout(function(){
-        labelEl.classList.add('verified');
-        goBtn.innerHTML = 'Continuing…';
-        try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: code}); } catch(e){}
-        // 3) Redirect shortly after the verified state shows
-        setTimeout(function(){ window.location.href = href; }, 650);
-      }, 1800);
+      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: refCode || 'none'}); } catch(e){}
+      setTimeout(function(){ window.location.href = href; }, 900);
     };
-
-    // Auto-fill ref code from URL ?ref=XYZ so VAs can give pre-filled links
-    (function(){
-      var qp = new URLSearchParams(window.location.search);
-      var prefill = qp.get('ref') || qp.get('code');
-      if (prefill) {
-        refInput.value = prefill.toUpperCase();
-        refInput.dispatchEvent(new Event('input'));
-      }
-    })();
 
     // Sticky mobile CTA
     var sticky = document.getElementById('stickyCta');
