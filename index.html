@@ -737,10 +737,13 @@
   </section>
 
   <style>
-    .proof { padding: 8px 0 40px; }
-    .proof .proof-eyebrow { display:inline-block; color: var(--cyan); background: rgba(50,187,185,.08); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; margin-bottom: 14px; }
-    .proof h3 { font-size: clamp(22px, 4vw, 30px); margin: 0 0 6px; }
-    .proof .proof-sub { color: var(--muted); margin: 0 0 26px; font-size: 15px; }
+    .proof { padding: 8px 0 44px; }
+    .proof-drawer { max-width: 480px; margin: 0 auto; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(255,255,255,.04); overflow: hidden; }
+    .proof-toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 16px; color: var(--text); list-style: none; user-select: none; }
+    .proof-toggle::-webkit-details-marker { display: none; }
+    .proof-toggle svg { width: 20px; height: 20px; transition: transform .25s ease; color: var(--cyan); flex: none; }
+    .proof-drawer[open] .proof-toggle svg { transform: rotate(180deg); }
+    .proof-content { padding: 6px 20px 26px; }
     .receipt { max-width: 420px; margin: 0 auto; background: #ffffff; color: #1a1a2e; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .receipt-head { padding: 30px 26px 22px; text-align: center; }
     .receipt-check { width: 74px; height: 74px; margin: 0 auto 16px; }
@@ -761,11 +764,12 @@
   </style>
   <section class="proof">
     <div class="container">
-      <div style="text-align:center;">
-        <span class="proof-eyebrow">Real Payouts</span>
-        <h3>Testers get paid — here's proof</h3>
-        <p class="proof-sub">A recent payout sent straight to a tester's PayPal.</p>
-      </div>
+      <details class="proof-drawer">
+        <summary class="proof-toggle">
+          <span>View Payout Examples</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="proof-content">
       <div class="receipt" role="img" aria-label="PayPal receipt showing a $520.00 payout from appjobs.online">
         <div class="receipt-head">
           <svg class="receipt-check" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -791,6 +795,8 @@
         </div>
         <div class="receipt-pp"><span class="pp1">Pay</span><span class="pp2">Pal</span></div>
       </div>
+        </div>
+      </details>
     </div>
   </section>
 
