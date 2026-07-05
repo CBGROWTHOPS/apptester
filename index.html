@@ -919,7 +919,7 @@
       overlay.classList.add('show');
       document.body.style.overflow = 'hidden';
 
-      var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || 'direct';
+      var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || '123';
       // Path-suffix: [s1]=cmc_vid · [s2]=brand · [s3]=referral code (when present)
       var href = ROTATOR + '/' + cmcVid + '/' + BRAND_SLUG + (refCode ? '/' + encodeURIComponent(refCode) : '');
 
