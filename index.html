@@ -8,6 +8,30 @@
   <meta name="theme-color" content="#0a0820" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/favicon.svg" />
+
+  <!-- ClickMagick tracking — GFL project (same as gameflowlabs / pocketcrew) -->
+  <script>
+    (function(){
+      var k = 'gfl_eid';
+      var eid = null;
+      try { eid = localStorage.getItem(k); } catch(e){}
+      if (!eid) {
+        eid = (crypto && crypto.randomUUID) ? crypto.randomUUID() :
+          'eid_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,10);
+        try { localStorage.setItem(k, eid); } catch(e){}
+      }
+      window.clickmagick_cmc = {
+        uid: '211897',
+        hid: '2728055707',
+        cmc_project: 'GFL',
+        vid_info: 'on',
+        utm_source: 'organic',
+        external_id: eid,
+      };
+    })();
+  </script>
+  <script src="https://cm.ssaff.link/44449f75.js" async></script>
+
   <style>
     :root {
       --bg: #0a0820;
