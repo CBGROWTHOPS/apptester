@@ -737,13 +737,14 @@
   </section>
 
   <style>
-    .proof { padding: 8px 0 44px; }
-    .proof-drawer { max-width: 480px; margin: 0 auto; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(255,255,255,.04); overflow: hidden; }
-    .proof-toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 16px; color: var(--text); list-style: none; user-select: none; }
+    .proof { padding: 8px 0 44px; text-align: center; }
+    .proof-drawer { margin: 0 auto; }
+    .proof-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 10px 4px; font-weight: 700; font-size: 16px; color: var(--cyan); list-style: none; user-select: none; }
     .proof-toggle::-webkit-details-marker { display: none; }
-    .proof-toggle svg { width: 20px; height: 20px; transition: transform .25s ease; color: var(--cyan); flex: none; }
+    .proof-toggle svg { width: 18px; height: 18px; transition: transform .25s ease; flex: none; }
     .proof-drawer[open] .proof-toggle svg { transform: rotate(180deg); }
-    .proof-content { padding: 6px 20px 26px; }
+    .proof-content { padding: 16px 0 0; }
+    .payout-img { display: block; width: 100%; max-width: 330px; margin: 0 auto; border-radius: 16px; box-shadow: 0 16px 44px rgba(0,0,0,.45); }
     .receipt { max-width: 420px; margin: 0 auto; background: #ffffff; color: #1a1a2e; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .receipt-head { padding: 30px 26px 22px; text-align: center; }
     .receipt-check { width: 74px; height: 74px; margin: 0 auto 16px; }
@@ -770,31 +771,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="proof-content">
-      <div class="receipt" role="img" aria-label="PayPal receipt showing a $520.00 payout from appjobs.online">
-        <div class="receipt-head">
-          <svg class="receipt-check" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="38" cy="38" r="35" stroke="#2ca01c" stroke-width="3"/>
-            <path d="M24 39.5 L34 49 L53 28" stroke="#2ca01c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <p class="receipt-amt">You received $520.00 USD</p>
-          <p class="receipt-from">from appjobs.online</p>
-        </div>
-        <div class="receipt-body">
-          <div class="receipt-item">
-            <div>
-              <div class="ri-name">1x App Tester Payout</div>
-              <div class="ri-id">Item #: 296925</div>
-            </div>
-            <div class="ri-amt">$500.00 <small>USD</small></div>
-          </div>
-          <div class="receipt-row"><span>Subtotal</span><span>$500.00 USD</span></div>
-          <div class="receipt-row"><span>Tax</span><span>$0.00 USD</span></div>
-          <div class="receipt-row"><span>Bonus</span><span>$20.00 USD</span></div>
-          <div class="receipt-row"><span>Fees</span><span>$0.00 USD</span></div>
-          <div class="receipt-row total"><span>Total</span><span>$520.00 USD</span></div>
-        </div>
-        <div class="receipt-pp"><span class="pp1">Pay</span><span class="pp2">Pal</span></div>
-      </div>
+      <img class="payout-img" src="/assets/payout-proof.png" alt="PayPal receipt — you received $520.00 USD from appjobs.online" loading="lazy" />
         </div>
       </details>
     </div>
