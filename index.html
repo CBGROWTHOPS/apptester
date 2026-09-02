@@ -934,6 +934,17 @@
 
       try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: refCode || 'none', device: selectedDevice || 'unknown'}); } catch(e){}
 
+      // Google Ads conversion — fires at CTA click, well before the 4.4s redirect
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18416384212/YQIYCK7Hs-wcENTxzs1E',
+            'value': 1.0,
+            'currency': 'USD'
+          });
+        }
+      } catch(e){}
+
       var vl1 = document.getElementById('vl1'), vl2 = document.getElementById('vl2'),
           vl3 = document.getElementById('vl3'), vl4 = document.getElementById('vl4');
 
